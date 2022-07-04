@@ -1,0 +1,42 @@
+
+export default class Adapter {
+  loader: { file: any; };
+  reader: { abort: () => void; };
+  config: any;
+  constructor(loader: any, config: any) {
+    this.loader = loader;
+    this.config = config;
+  }
+
+
+public async upload(): Promise<any> {
+  const value = await this.loader.file;
+      return this.read( value);
+    }
+
+  read(file: Blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = function () {
+        resolve({ default: reader.result });
+      };
+
+      reader.onerror = function (error) {
+        reject(error);
+      };
+
+      reader.onabort = function () {
+        reject();
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  abort() {
+    if (this.reader) {
+      this.reader.abort();
+    }
+  }
+}
+

@@ -1,0 +1,40 @@
+<h2>Simple usage</h2>
+
+<p><strong>Note:</strong> Open the console for additional logs.</p>
+
+<p>
+  <button (click)="toggleDisableEditors()">
+    {{ isDisabled ? 'Enable editors' : 'Disable editors' }}
+  </button>
+</p>
+
+<h3>Classic build</h3>
+
+<h4>Component events:</h4>
+<ul>
+  <li *ngFor="let eventInfo of componentEvents">
+    <span>{{ eventInfo }}</span>
+  </li>
+</ul>
+
+<form>
+  <div class="form-group">
+    <ckeditor
+name="myckeditor"
+  #ckeditor
+  [(ngModel)]="postData.content"
+  [editor]="Editor"
+  [disabled]="isDisabled"
+  debounce="300"
+  [config]="ckEditorConfig"
+  (ready)="onReady($event)"
+  (change)="onChange($event)"
+  (blur)="onBlur($event)"
+  (focus)="onFocus($event)"
+></ckeditor>
+  </div>
+  <div class="form-group">
+    <button type="submit" (click)="savePost()">Save</button>
+  </div>
+</form>
+

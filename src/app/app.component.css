@@ -1,0 +1,7 @@
+p {
+  font-family: Lato;
+}
+
+::ng-deep .ck-editor__editable {
+  min-height: 200px;
+}
