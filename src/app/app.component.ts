@@ -19,12 +19,12 @@ export class AppComponent implements OnInit {
   ckeditor: any;
 
   public componentEvents: string[] = [];
- postData = {content: '' };
+ postData = {content: '',ckEditorConfig: {} };
 
  public ckEditorConfig: any;
  constructor() {};
   ngOnInit(): void {
-    this.ckEditorConfig = {
+    this.postData.ckEditorConfig = {
       toolbar: {
         items: [
           'heading',
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
           'outdent',
           'indent',
           '|',
-          'imageUpload',
+          'imageInsert',
           'blockQuote',
           'insertTable',
           'mediaEmbed',
@@ -60,7 +60,6 @@ export class AppComponent implements OnInit {
           'highlight',
           'horizontalLine',
 
-          'imageInsert',
           'pageBreak',
           'removeFormat',
           'sourceEditing',
@@ -93,7 +92,7 @@ export class AppComponent implements OnInit {
 
   savePost() {
     console.log(this.postData);
-    this.isDisabled = true;
+    this.isDisabled = false;
   }
 
   toggleDisableEditors(): void {
